@@ -20,6 +20,6 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		echo "Yoaii";
+		$this->load->view('praktikum1');
 	}
 }
