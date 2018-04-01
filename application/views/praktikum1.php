@@ -71,6 +71,7 @@
 </div>
 
 <nav class="navbar navbar-default" data-spy="affix" data-offset-top="197">
+	<a class="navbar-Brand" href="#"><img class="img-responsive" alt="Brand" src="assets/picture/ajeng1.jpg"></a>
   <div class="container-fluid">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -85,6 +86,7 @@
         <ul class="nav navbar-nav">
 		 		<li class="active"><a href="#Home"><b>Home</b></a></li>
 				<li><a href="#Biodata"><b>About</b></a></li>
+				<li><a href="#Riwayat"><b>Blog</b></a></li>
         </ul>
       </div>
     </div>
@@ -121,6 +123,17 @@
 	</div>
 </div>
 
+<div id="Riwayat" class="container-fluid">
+	<div class="container">
+	  <div class="row">
+	    <font face="Kristen ITC"><h1>Blog</h1>
+	    <br>
+		<p align="justify">	Pada website ini, saya juga mempunyai beberapa artikel favorit.</p>
+		<p align="justify">	Check this out guyss! just klik the Button-> <a href="<?=site_url('home/blog') ?>"><button type="button" class="btn btn-primary">Artikel</button></a></p>
+		</font>
+	  </div>
+	</div>
+</div>
 <div class="container-fluid text-center" style="background-color:#ff4081">
 	<div style="color:#FFCC99">
 		<div class="panel-body">

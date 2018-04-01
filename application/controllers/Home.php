@@ -22,4 +22,16 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('praktikum1');
 	}
+	public function blog()
+	{
+		$this->load->model('blog_model');
+		$data['tampil'] = $this->blog_model->tampil();
+		$this->load->view('blog_view',$data);
+	}
+	public function tampil_blog($id)
+	{
+		$this->load->model('blog_model');
+		$data['tampil'] = $this->blog_model->tampil_id($id,'id');
+		$this->load->view('blog_detail',$data);
+	}
 }
