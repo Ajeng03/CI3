@@ -18,10 +18,12 @@ class Home extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	// PRAKTUKUM1
 	public function index()
 	{
 		$this->load->view('praktikum1');
 	}
+	// PRAKTUKUM2
 	public function blog()
 	{
 		$this->load->model('blog_model');
@@ -33,5 +35,28 @@ class Home extends CI_Controller {
 		$this->load->model('blog_model');
 		$data['tampil'] = $this->blog_model->tampil_id($id,'id');
 		$this->load->view('blog_detail',$data);
+	}
+	// PRAKTIKUM3
+	public function tambah_artikel()
+	{
+		$this->load->model('blog_model');
+		$data = array();
+
+		if ($this->input->post('simpan'))
+		{
+			$upload = $this->blog_model->upload();
+
+			if ($upload['result'] == 'success')
+			{
+				$this->blog_model->insert($upload);
+				redirect('home/blog');
+			}
+			else
+			{
+				$data['messege'] = $upload['error'];
+			}
+		}
+
+		$this->load->view('tambah_konten', $data);
 	}
 }

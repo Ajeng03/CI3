@@ -3,7 +3,7 @@
 <head>
 	<title>Artikel Favorite</title>
 </head>
-<body>
+<body style="background-color: orange">
 	<?php 
 	foreach ($tampil as $key) {?>
 		<table border="0" width="500" align="center">

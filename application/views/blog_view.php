@@ -3,7 +3,7 @@
 <head>
 	<title>Favorite Artikel</title>
 </head>
-<body>
+<body style="background-color: orange">
 	<font face="Kristen ITC">
 	<center><h1>Artikel</h1></center>
 	</font>
@@ -26,5 +26,8 @@
 		</font>
 		</table>
 	<?php } ?>
+	<br>
+	<br>
+	<a href="../home/tambah_artikel">Tambah Artikel</a>
 </body>
 </html>
