@@ -8,33 +8,32 @@
 	<center><h1>Tambahkan Artikel</h1></center>
 
 <div class="alert-warning"><?php echo (isset($message))? : "";?></div>
-<?php echo form_open('home/tambah_artikel', array('enctype'=>'multipart/form-data')); ?>
-
+	<?php echo form_open("home/ubah/".$tampil->id, array('enctype'=>'multipart/form-data')); ?>
 	<table border="0px">
 			<tr>
 				<td>Judul Artikel</td>
 				<td>:</td>
-				<td><input type="text" name="input_judul" value="<?php echo set_value('input_judul'); ?>"></td>
+				<td><input type="text" name="input_judul" value="<?php echo set_value('input_judul', $tampil->judul); ?>"></td>
 			</tr>
 			<tr>
 				<td>Isi Konten</td>
 				<td>:</td><br>
 				<td>
-				<textarea name="input_konten" rows="10" cols="50"></textarea>
+				<textarea name="input_konten" rows="10" cols="50"><?php echo set_value('input_konten', $tampil->konten_artikel); ?></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>Image</td>
 				<td>:</td>
-				<td><input type="file" name="input_gambar"></td>
+				<td><input type="file" name="input_gambar" ></td>
 			</tr>
 			<tr>
 				<td>Pengarang</td>
 				<td>:</td>
-				<td><input type="text" name="input_pengarang" required=""></td>
+				<td><input type="text" name="input_pengarang" required="" value="<?php echo set_value('input_pengarang', $tampil->pengarang); ?>"></td>
 			</tr>
 			<td colspan="3" align="center">
-				<input type="submit" name="simpan" value="Posting">
+				<input type="submit" name="simpan" value="Edit">
 				<input type="reset" name="reset" value="Cancel">
 			</td>
 		</table>

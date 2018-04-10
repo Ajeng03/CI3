@@ -41,12 +41,47 @@ class Blog_Model extends CI_Model {
 			'id' => '',
 			'judul' => $this->input->post('input_judul'),
 			'konten_artikel' => $this->input->post('input_konten'),
-			'tanggal_posting' => $this->input->post('input_post'),
+			'tanggal_posting' => date('Y-m-d'),
 			'image' => $upload['file']['file_name'],
 			'pengarang' => $this->input->post('input_pengarang')
 		);
 
 		$this->db->insert('blog', $data);
+	}
+
+	public function edit($upload, $id)
+	{
+		if ($upload['result'] == 'success') {
+		$data = array(
+			'judul' => $this->input->post('input_judul'),
+			'konten_artikel' => $this->input->post('input_konten'),
+			'image' => $upload['file']['file_name'],
+			'pengarang' => $this->input->post('input_pengarang')
+	    );
+	    }
+	    else{
+	    	$data = array(
+			'judul' => $this->input->post('input_judul'),
+			'konten_artikel' => $this->input->post('input_konten'),
+			'pengarang' => $this->input->post('input_pengarang')
+	    );
+	    }	    
+	    
+	    $this->db->where('id', $id);
+	    $this->db->update('blog', $data);
+	}
+
+	public function view_by($id)
+	{
+	    $this->db->where('id', $id);
+	    return $this->db->get('blog')->row();
+	}
+
+	public function delete($id)
+	{
+	    $this->db->where('id', $id);
+	    $this->db->delete('blog');
+	
 	}
 }
 ?>

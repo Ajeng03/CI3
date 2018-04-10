@@ -59,4 +59,25 @@ class Home extends CI_Controller {
 
 		$this->load->view('tambah_konten', $data);
 	}
+
+	public function ubah($id){
+		$this->load->model('blog_model');
+	    if($this->input->post('simpan')){ // Jika user mengklik tombol submit yang ada di forma	
+	    	$upload=$this->blog_model->upload();
+	    	$this->blog_model->edit($upload, $id); // Panggil fungsi edit() yang ada di blog_model.php
+	        redirect('home/blog');
+	    }    	
+	    $data['tampil'] = $this->blog_model->view_by($id);
+	    $this->load->view('ubah_konten', $data);
+	 }
+
+
+	public function hapus($id) {
+
+		$this->load->model('blog_model');
+
+	    $this->blog_model->delete($id); // Panggil fungsi delete() yang ada di SiswaModel.php
+	    
+	    redirect('home/blog');
+	}
 }
