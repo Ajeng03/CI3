@@ -51,19 +51,21 @@ class Blog_Model extends CI_Model {
 
 	public function edit($upload, $id)
 	{
-		if ($upload['result'] == 'success') {
-		$data = array(
-			'judul' => $this->input->post('input_judul'),
-			'konten_artikel' => $this->input->post('input_konten'),
-			'image' => $upload['file']['file_name'],
-			'pengarang' => $this->input->post('input_pengarang')
+		if ($upload['result'] == 'success') 
+		{
+			$data = array(
+				'judul' => $this->input->post('input_judul'),
+				'konten_artikel' => $this->input->post('input_konten'),
+				'image' => $upload['file']['file_name'],
+				'pengarang' => $this->input->post('input_pengarang')
 	    );
 	    }
-	    else{
+	    else
+	    {
 	    	$data = array(
-			'judul' => $this->input->post('input_judul'),
-			'konten_artikel' => $this->input->post('input_konten'),
-			'pengarang' => $this->input->post('input_pengarang')
+				'judul' => $this->input->post('input_judul'),
+				'konten_artikel' => $this->input->post('input_konten'),
+				'pengarang' => $this->input->post('input_pengarang')
 	    );
 	    }	    
 	    
@@ -81,7 +83,6 @@ class Blog_Model extends CI_Model {
 	{
 	    $this->db->where('id', $id);
 	    $this->db->delete('blog');
-	
 	}
 }
 ?>
