@@ -2,22 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
 	// PRAKTUKUM1
 	public function index()
 	{
@@ -39,6 +23,36 @@ class Home extends CI_Controller {
 	// PRAKTIKUM3
 	public function tambah_artikel()
 	{
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('input_judul', 'Judul', 'required|is_unique[blog.judul]',
+		array(
+				'required' 		=> 'Harap " %s " di isi agar bisa di simpan',
+				'is_unique' 	=> 'Judul ' .$this->input->post('input_judul'). ' sudah ada!'
+			));
+		$this->form_validation->set_rules('input_konten', 'Articel', 'required|max_length[750]',
+			array(
+				'required' 		=> 'Isi %s, tidak boleh kosong',
+				'min_length' 	=> 'text %s belum mencapai limit',
+			));
+		$this->form_validation->set_rules('input_pengarang', 'Author', 'required');
+		$this->form_validation->set_rules('input_gender', 'Gender', 'required');
+		$this->form_validation->set_rules('input_kontak', 'Contact', 'required|numeric|min_length[12]',
+			array(
+				'required' 		=> 'Isi %s, tidak boleh kosong',
+				'min_length' 	=> 'angka %s belum mencapai limit',
+			));
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			echo "SUKSES";
+		}
+		else
+		{
+			$this->load->view('tambah_konten');
+		}
+
 		$this->load->model('blog_model');
 		$data = array();
 
@@ -57,11 +71,13 @@ class Home extends CI_Controller {
 			}
 		}
 
-		$this->load->view('tambah_konten', $data);
+		//$this->load->view('tambah_konten', $data);
 	}
 
 	public function ubah($id){
+
 		$this->load->model('blog_model');
+
 	    if($this->input->post('simpan'))
 	    {
 	    	$upload=$this->blog_model->upload();
@@ -69,7 +85,41 @@ class Home extends CI_Controller {
 	        redirect('home/blog');
 	    }    	
 	    $data['tampil'] = $this->blog_model->view_by($id);
-	    $this->load->view('ubah_konten', $data);
+
+	    //$this->load->view('ubah_konten', $data);
+
+	    $this->load->helper('form');
+	    $this->load->library('form_validation');
+
+		// $this->load->helper(array('form', 'url'));
+		// $this->load->library('form_validation');
+
+		$this->form_validation->set_rules('input_judul', 'Judul', 'required|is_unique[blog.judul]',
+		array(
+				'required' 		=> 'Harap " %s " di isi agar bisa di simpan',
+				'is_unique' 	=> 'Judul ' .$this->input->post('input_judul'). ' sudah ada!'
+			));
+		$this->form_validation->set_rules('input_konten', 'Articel', 'required|max_length[750]',
+			array(
+				'required' 		=> 'Isi %s, tidak boleh kosong',
+				'min_length' 	=> 'text %s belum mencapai limit',
+			));
+		$this->form_validation->set_rules('input_pengarang', 'Author', 'required');
+		$this->form_validation->set_rules('input_gender', 'Gender', 'required');
+		$this->form_validation->set_rules('input_kontak', 'Contact', 'required|numeric|min_length[12]',
+			array(
+				'required' 		=> 'Isi %s, tidak boleh kosong',
+				'min_length' 	=> 'angka %s belum mencapai limit',
+			));
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			echo "SUKSES";
+		}
+		else
+		{
+			  $this->load->view('ubah_konten', $data);
+		}
 	 }
 
 	public function hapus($id) 

@@ -7,7 +7,7 @@ class Blog_Model extends CI_Model {
 		$query = $this->db->get('blog');
 		return $query->result();
 	}
-	public function tampil_id($id,$primarykey)
+	public function tampil_id($id, $primarykey)
 	{
 		$this->db->where($primarykey,$id);
 		$query = $this->db->get('blog');
@@ -43,7 +43,9 @@ class Blog_Model extends CI_Model {
 			'konten_artikel' => $this->input->post('input_konten'),
 			'tanggal_posting' => date('Y-m-d'),
 			'image' => $upload['file']['file_name'],
-			'pengarang' => $this->input->post('input_pengarang')
+			'pengarang' => $this->input->post('input_pengarang'),
+			'gender' => $this->input->post('input_gender'),
+			'kontak' => $this->input->post('input_kontak')
 		);
 
 		$this->db->insert('blog', $data);
@@ -57,7 +59,9 @@ class Blog_Model extends CI_Model {
 				'judul' => $this->input->post('input_judul'),
 				'konten_artikel' => $this->input->post('input_konten'),
 				'image' => $upload['file']['file_name'],
-				'pengarang' => $this->input->post('input_pengarang')
+				'pengarang' => $this->input->post('input_pengarang'),
+				'gender' => $this->input->post('input_gender'),
+				'kontak' => $this->input->post('input_kontak')
 	    );
 	    }
 	    else
@@ -65,7 +69,9 @@ class Blog_Model extends CI_Model {
 	    	$data = array(
 				'judul' => $this->input->post('input_judul'),
 				'konten_artikel' => $this->input->post('input_konten'),
-				'pengarang' => $this->input->post('input_pengarang')
+				'pengarang' => $this->input->post('input_pengarang'),
+				'gender' => $this->input->post('input_gender'),
+				'kontak' => $this->input->post('input_kontak')
 	    );
 	    }	    
 	    

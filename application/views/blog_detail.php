@@ -15,8 +15,10 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<font face="Kristen ITC"><?=$key->tanggal_posting;?> - 
-					<font face="Kristen ITC"><?=$key->pengarang;?>
+					<font face="Kristen ITC"><?=$key->tanggal_posting;?><br>
+					<font face="Kristen ITC"><?=$key->pengarang;?> - 
+					<font face="Kristen ITC"><?=$key->gender;?><br>
+					<font face="Kristen ITC"><?=$key->kontak;?>
 				</td></font>
 			</tr>
 			<tr>
