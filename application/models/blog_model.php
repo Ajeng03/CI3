@@ -12,7 +12,6 @@ class Blog_Model extends CI_Model {
 		$this->db->where($primarykey,$id);
 		$query = $this->db->get('blog');
 		return $query->result();
-
 	}
 
 	public function upload()
