@@ -8,6 +8,7 @@
 	<center><h1>Artikel</h1></center>
 	</font>
 	<a href="../home/tambah_artikel"><button type="button" class="btn btn-primary">Tambah Artikel</button></a>
+	<a href="../category"><button type="button" class="btn btn-primary">Kategori</button></a>
 	<?php 
 	foreach ($tampil as $key) {?>
 		<table border="1" width="600">
@@ -18,6 +19,7 @@
 				Judul Artikel   : <a href="<?=site_url('home/tampil_blog/').$key->id; ?>"><?=$key->judul;?></a><br>
 				Pengarang   : <?=$key->pengarang;?><br>
 				Tanggal Posting : <?=$key->tanggal_posting;?></a><br>
+				Kategori : <?=$key->cat_name;?></a><br>
 				Klik judul untuk membaca artikel secara lengkap.<br>
 				<p align="center">
 				<a href="../home/ubah/<?=$key->id?>"><button type="button" class="btn btn-primary">Update</button></a>

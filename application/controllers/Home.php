@@ -26,6 +26,11 @@ class Home extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 
+		$this->load->model('category_model');
+		$this->load->model('blog_model');
+		$data = array();
+		$data['categories'] = $this->category_model->get_all_categories();
+
 		$this->form_validation->set_rules('input_judul', 'Judul', 'required|is_unique[blog.judul]',
 		array(
 				'required' 		=> 'Harap " %s " di isi agar bisa di simpan',
@@ -46,37 +51,33 @@ class Home extends CI_Controller {
 
 		if ($this->form_validation->run() == TRUE)
 		{
-			echo "SUKSES";
+			if ($this->input->post('simpan'))
+			{
+				$upload = $this->blog_model->upload();
+
+				if ($upload['result'] == 'success')
+				{
+					$this->blog_model->insert($upload);
+					redirect('home/blog');
+				}
+				else
+				{
+					$data['messege'] = $upload['error'];
+				}
+			}
 		}
 		else
 		{
-			$this->load->view('tambah_konten');
+			$this->load->view('tambah_konten', $data);
 		}
-
-		$this->load->model('blog_model');
-		$data = array();
-
-		if ($this->input->post('simpan'))
-		{
-			$upload = $this->blog_model->upload();
-
-			if ($upload['result'] == 'success')
-			{
-				$this->blog_model->insert($upload);
-				redirect('home/blog');
-			}
-			else
-			{
-				$data['messege'] = $upload['error'];
-			}
-		}
-
 		//$this->load->view('tambah_konten', $data);
 	}
 
 	public function ubah($id){
 
 		$this->load->model('blog_model');
+		$this->load->model('category_model');
+		$data['categories'] = $this->category_model->get_all_categories();
 
 	    if($this->input->post('simpan'))
 	    {

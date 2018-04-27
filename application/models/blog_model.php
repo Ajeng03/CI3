@@ -4,8 +4,9 @@ class Blog_Model extends CI_Model {
 	public function tampil()
 	{
 		$this->db->select('*');
-		$query = $this->db->get('blog');
-		return $query->result();
+		$this->db->from('blog');
+		$this->db->join('categories', 'blog.id_cat= categories.id_cat');
+		return $this->db->get()->result();
 	}
 	public function tampil_id($id, $primarykey)
 	{
@@ -40,6 +41,7 @@ class Blog_Model extends CI_Model {
 			'id' => '',
 			'judul' => $this->input->post('input_judul'),
 			'konten_artikel' => $this->input->post('input_konten'),
+			'id_cat' => $this->input->post('id_cat'),
 			'tanggal_posting' => date('Y-m-d'),
 			'image' => $upload['file']['file_name'],
 			'pengarang' => $this->input->post('input_pengarang'),
@@ -57,6 +59,7 @@ class Blog_Model extends CI_Model {
 			$data = array(
 				'judul' => $this->input->post('input_judul'),
 				'konten_artikel' => $this->input->post('input_konten'),
+				'id_cat' => $this->input->post('id_cat'),
 				'image' => $upload['file']['file_name'],
 				'pengarang' => $this->input->post('input_pengarang'),
 				'gender' => $this->input->post('input_gender'),
@@ -68,6 +71,7 @@ class Blog_Model extends CI_Model {
 	    	$data = array(
 				'judul' => $this->input->post('input_judul'),
 				'konten_artikel' => $this->input->post('input_konten'),
+				'id_cat' => $this->input->post('id_cat'),
 				'pengarang' => $this->input->post('input_pengarang'),
 				'gender' => $this->input->post('input_gender'),
 				'kontak' => $this->input->post('input_kontak')
@@ -88,6 +92,19 @@ class Blog_Model extends CI_Model {
 	{
 	    $this->db->where('id', $id);
 	    $this->db->delete('blog');
+	}
+
+	public function create_category()
+	{
+
+		$data = array (
+			'id_cat' => '',
+			'cat_name' => $this->input->post('cat_name'),
+			'cat_description' => $this->input->post('cat_description'),
+			'date_created' => ''
+		);
+
+		return $this->db->insert('categories', $data); 
 	}
 }
 ?>

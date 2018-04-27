@@ -39,6 +39,18 @@
 				<td><input type="text" name="input_pengarang" value="<?php echo set_value('input_pengarang', $tampil->pengarang); ?>" required></td>
 			</tr>
 			<tr>
+				<td>Kategori</td>
+				<td>:</td>
+				<td>
+					<select name="id_cat" class="form-control" required>
+					<option value="">Pilih Kategori</option>
+					<?php foreach($categories as $category): ?>
+						<option value="<?php echo $category->id_cat; ?>"><?php echo $category->cat_name; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+			</tr>
+			<tr>
 				<td>Gender</td>
 				<td>:</td>
 				<td>

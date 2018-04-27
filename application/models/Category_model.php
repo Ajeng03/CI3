@@ -5,12 +5,47 @@ class Category_model extends CI_Model {
 	{
 
 		$data = array (
-			'id' => '',
+			'id_cat' => '',
 			'cat_name' => $this->input->post('cat_name'),
 			'cat_description' => $this->input->post('cat_description'),
-			'date_created' => ''
+			'date_created' => date('Y-m-d')
 		);
 
-		return $this->db->insert('categories', $data); 
+		$this->db->insert('categories', $data); 
+	}
+
+	public function get_all_categories()
+	{
+		$this->db->order_by('cat_name');
+		$query = $this->db->get('categories');
+		return $query->result();
+	}
+
+	public function get_category_by_id($id)
+	{
+		$query = $this->db->get_where('categories', array('id_cat' => $id));
+		return $query->row();
+	}
+
+	public function edit($id)
+	{
+			$data = array(
+				'cat_name' => $this->input->post('cat_name'),
+				'cat_description' => $this->input->post('cat_description'),
+	    );    
+	    
+	    $this->db->where('id_cat', $id);
+	    $this->db->update('categories', $data);
+	}
+
+	public function delete($id)
+	{
+	    $this->db->where('id_cat', $id);
+	    $this->db->delete('categories');
+	}
+	public function view_by($id)
+	{
+	    $this->db->where('id_cat', $id);
+	    return $this->db->get('categories')->row();
 	}
 }
