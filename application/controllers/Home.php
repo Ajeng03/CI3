@@ -2,12 +2,44 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
-	// PRAKTUKUM1
+
 	public function index()
-	{
-		$this->load->view('praktikum1');
+    {
+    	$this->load->view('praktikum1');
+    	
+    	$this->load->model('blog_model');
+    	$data['blog_model'] = $this->blog_model->get_artikels();
+    	$this->load->view('blog_view', $data);
+
+    	$data['blog_model'] = 'blog_model';
+        
+        // Dapatkan data dari model Blog dengan pagination
+        // Jumlah artikel per halaman
+        $limit_per_page = 6;
+
+        // URI segment untuk mendeteksi "halaman ke berapa" dari URL
+        $start_index = ( $this->uri->segment(3) ) ? $this->uri->segment(3) : 0;
+
+        // Dapatkan jumlah data
+        $total_records = $this->blog_model->get_total();
+
+        if ($total_records > 0) {
+		    // Dapatkan data pada halaman yg dituju
+		    $data['blog_model'] = $this->blog_model->get_all_artikel($limit_per_page, $start_index);
+		    
+		    // Konfigurasi pagination
+		    $config['base_url'] = base_url() . 'blog/index';
+		    $config['total_rows'] = $total_records;
+		    $config['per_page'] = $limit_per_page;
+		    $config["uri_segment"] = 3;
+		    
+		    $this->pagination->initialize($config);
+		        
+		    // Buat link pagination
+			$data["links"] = $this->pagination->create_links();
+		}		
 	}
-	// PRAKTUKUM2
+
 	public function blog()
 	{
 		$this->load->model('blog_model');
@@ -29,6 +61,7 @@ class Home extends CI_Controller {
 		$this->load->model('category_model');
 		$this->load->model('blog_model');
 		$data = array();
+		
 		$data['categories'] = $this->category_model->get_all_categories();
 
 		$this->form_validation->set_rules('input_judul', 'Judul', 'required|is_unique[blog.judul]',
@@ -54,7 +87,6 @@ class Home extends CI_Controller {
 			if ($this->input->post('simpan'))
 			{
 				$upload = $this->blog_model->upload();
-
 				if ($upload['result'] == 'success')
 				{
 					$this->blog_model->insert($upload);

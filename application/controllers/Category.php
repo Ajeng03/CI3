@@ -8,6 +8,8 @@ class Category extends CI_Controller {
 		$this->load->model('category_model');
 		$data['categories'] = $this->category_model->get_all_categories();
 		$this->load->view('cat_create', $data);
+		// $data['category_model'] = $this->category_model->get_artikels();
+		//$this->load->view('blog_view', $data);
 	}
 
 	public function artikel($id)
@@ -30,6 +32,7 @@ class Category extends CI_Controller {
 				'is_unique' 	=> 'Judul ' .$this->input->post('cat_name'). ' sudah ada!'
 			));
 		$this->form_validation->set_rules('cat_description', 'Deskripsi', 'required');
+		
 		if ($this->form_validation->run() == TRUE)
 		{
 			if($this->input->post('simpan'))
@@ -42,7 +45,6 @@ class Category extends CI_Controller {
 		{
 			  redirect('category');
 		}
-		
 	}
 
 	public function ubah($id){
