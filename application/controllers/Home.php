@@ -9,7 +9,7 @@ class Home extends CI_Controller {
     	
     	$this->load->model('blog_model');
     	$data['blog_model'] = $this->blog_model->get_artikels();
-    	$this->load->view('blog_view', $data);
+    	//$this->load->view('blog_view', $data);
 
     	$data['blog_model'] = 'blog_model';
         
