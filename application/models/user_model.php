@@ -1,6 +1,11 @@
 <?php
-class User_model extends CI_Model
-{
+class User_model extends CI_Model {
+
+  public function __construct()
+  {
+    parent::__construct();
+  }
+
    public function register()
    {
 	   $enc_password = md5($this->input->post('password'));
@@ -38,4 +43,29 @@ class User_model extends CI_Model
            return false;
        }
    }
+
+  // public function get_user($id_user)
+  // {
+  //   $this->db->select('id_level');
+  //   $this->db->from('user_level');
+  //   $this->db->where('id_user', $id_user);
+  //   return $this->db->get()->result();
+  // }
+
+    public function insert_user_level($id_user)
+    {
+      $data = array(
+        'id_user' => $id_user,
+        'id_level' => 2
+      );
+      $this->db->insert('user_level', $data);
+    }
+
+    public function get_user($username)
+    {
+      $this->db->select('id');
+      $this->db->from('user');
+      $this->db->where('username', $username);
+      return $this->db->get()->result();
+    }
 }

@@ -6,13 +6,22 @@ class Home extends CI_Controller {
 	public function index()
     {
     	$this->load->view('praktikum1');
+
+    	if ($this->session->userdata('level') == 1) 
+    	{
+			$data['level'] = TRUE;
+		} 
+		else 
+		{
+			$data['level'] = FALSE;
+		}
     	
     	$this->load->model('blog_model');
     	$data['blog_model'] = $this->blog_model->get_artikels();
     	//$this->load->view('blog_view', $data);
 
     	$data['blog_model'] = 'blog_model';
-        
+
         // Dapatkan data dari model Blog dengan pagination
         // Jumlah artikel per halaman
         $limit_per_page = 6;
@@ -42,6 +51,15 @@ class Home extends CI_Controller {
 
 	public function blog()
 	{
+		if ($this->session->userdata('level') == 1) 
+    	{
+			$data['level'] = TRUE;
+		} 
+		else 
+		{
+			$data['level'] = FALSE;
+		}
+		
 		$this->load->model('blog_model');
 		$data['tampil'] = $this->blog_model->tampil();
 		$this->load->view('blog_view',$data);
@@ -55,6 +73,11 @@ class Home extends CI_Controller {
 	// PRAKTIKUM3
 	public function tambah_artikel()
 	{
+		if ($this->session->userdata('level') != 1) 
+		{
+			$this->session->set_flashdata('Maaf Anda bukan Admin', 'Tidak bisa akses halaman ini!');
+			redirect('login');
+		}
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 
@@ -105,7 +128,13 @@ class Home extends CI_Controller {
 		//$this->load->view('tambah_konten', $data);
 	}
 
-	public function ubah($id){
+	public function ubah($id)
+	{
+		if ($this->session->userdata('level') != 1) 
+		{
+			$this->session->set_flashdata('Maaf Anda bukan Admin', 'Tidak bisa akses halaman ini!');
+			redirect('login');
+		}
 
 		$this->load->model('blog_model');
 		$this->load->model('category_model');
@@ -157,6 +186,12 @@ class Home extends CI_Controller {
 
 	public function hapus($id) 
 	{
+		if ($this->session->userdata('level') != 1) 
+		{
+			$this->session->set_flashdata('Maaf Anda bukan Admin', 'Tidak bisa akses halaman ini!');
+			redirect('login');
+		}
+		
 		$this->load->model('blog_model');
 
 	    $this->blog_model->delete($id);

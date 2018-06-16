@@ -3,8 +3,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Category extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('category_model');
+		
+		if ($this->session->userdata('level') != 1) 
+		{
+			$this->session->set_flashdata('Maaf Anda bukan Admin', 'Tidak bisa akses halaman ini!');
+			redirect('home/blog');
+		}
+	}
+
 	public function index()
 	{
+		if ($this->session->userdata('level') == 1) 
+    	{
+			$data['level'] = TRUE;
+		} 
+		else 
+		{
+			$data['level'] = FALSE;
+		}
+
 		$this->load->model('category_model');
 		$data['categories'] = $this->category_model->get_all_categories();
 		$this->load->view('cat_create', $data);
@@ -20,6 +41,11 @@ class Category extends CI_Controller {
 
 	public function create()
 	{
+		if ($this->session->userdata('level') != 1) 
+		{
+			$this->session->set_flashdata('Maaf Anda bukan Admin', 'Tidak bisa akses halaman ini!');
+			redirect('login');
+		}
 
 		$this->load->model('category_model');
 
@@ -47,7 +73,13 @@ class Category extends CI_Controller {
 		}
 	}
 
-	public function ubah($id){
+	public function ubah($id)
+	{
+		if ($this->session->userdata('level') != 1) 
+		{
+			$this->session->set_flashdata('Maaf Anda bukan Admin', 'Tidak bisa akses halaman ini!');
+			redirect('login');
+		}
 
 		$this->load->model('category_model');
 		$data['categories'] = $this->category_model->get_all_categories();
@@ -85,6 +117,12 @@ class Category extends CI_Controller {
 
 	public function hapus($id) 
 	{
+		if ($this->session->userdata('level') != 1) 
+		{
+			$this->session->set_flashdata('Maaf Anda bukan Admin', 'Tidak bisa akses halaman ini!');
+			redirect('login');
+		}
+
 		$this->load->model('category_model');
 
 	    $this->category_model->delete($id);

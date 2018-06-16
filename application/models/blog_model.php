@@ -35,7 +35,7 @@ class Blog_Model extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('blog');
-		$this->db->join('categories', 'blog.id_cat= categories.id_cat');
+		$this->db->join('categories', 'blog.id_cat = categories.id_cat');
 		return $this->db->get()->result();
 	}
 	public function tampil_id($id, $primarykey)

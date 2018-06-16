@@ -14,19 +14,35 @@
 </head>
 <body>
 
-<?php echo form_open('user/login'); ?>
+<?php echo validation_errors(); ?>
+<?php echo form_open_multipart('user/login', array('class' => 'needs-validation', 'novalidate' => '')); ?>
+<!-- <?php echo form_open('user/login'); ?> -->
+
+<center>^^ FORM LOGIN ^^</center>
+<br>
+<center>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <h1 class="text-center"><?php echo $page_title; ?></h1>
+            <!-- <h1 class="text-center"><?php echo $page_title; ?></h1> -->
             <div class="form-group">
-                <input type="text" name="username" class="form-control" placeholder="Masukkan Username" required autofocus>
+                <input type="text" name="username" class="form-control" placeholder="Input Username" required autofocus> 
             </div>
+            <br>
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
+                <input type="password" name="password" class="form-control" placeholder="Input Password" required> 
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
-        </div>
+            <br>
+            <div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </div>
     </div>
+</center>
+    <center>
+        <p>
+            Create New Account!
+            <a href="user/register">New Account</a>
+        </p>
+    </center>
 <?php echo form_close(); ?>
 
 <script src="../assets/admin/plugins/jquery/jquery.min.js"></script>

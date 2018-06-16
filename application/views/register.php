@@ -33,7 +33,7 @@
        <td><label>Gender</label></td>
        <td>:</td>
        <td><select name="gender" class="form-control" style="width: 250px;">
-                  <option value="Perempuan">Permpuan</option>
+                  <option value="Perempuan">Perempuan</option>
                   <option value="Laki-laki">Laki-Laki</option>
               </select>
         </td>
