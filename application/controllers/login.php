@@ -41,8 +41,10 @@ class Login extends CI_Controller {
 					'id' => $id_user,
 					'username' => $username,
 					'logged_in' => true,
-					'level' => $level[0]->id_level
+					'level' => $level[0]->level_id
 				);
+				var_dump($level);
+				die();
 
 				$this->session->set_userdata($user_data);
 				$this->session->set_flashdata('Selamat Anda berhasil login', 'Welcome');
@@ -60,7 +62,8 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata('logged_in');
 		$this->session->unset_userdata('id');
 		$this->session->unset_userdata('username');
-		$this->session->set_flashdata('Anda telah Logiut', 'Thank You!');
+		$this->session->sess_destroy();
+		$this->session->set_flashdata('Anda telah Logout', 'Thank You!');
 		redirect('login');
 	}
 }

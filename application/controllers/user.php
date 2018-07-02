@@ -74,11 +74,13 @@ class User extends CI_Controller
 			    if($user_id)
 			    {
 			        // Buat session
+                    $level = $this->user_model->get_user($user_id);
 			        $user_data = array
 			        (
 			            'user_id' => $user_id,
 			            'username' => $username,
-			            'logged_in' => true
+			            'logged_in' => true,
+                        'level' => $level[0]->level_id
 			        );
 
 			        $this->session->set_userdata($user_data);

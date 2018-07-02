@@ -74,7 +74,16 @@
        <td><input type="password" class="form-control" name="password" placeholder="Password"></td>
    </div>
 </tr> 
-
+<tr>
+  <td><label for="">Pilih Paket Membership</label></td>
+  <td>:</td>
+  <td>
+        <input type="radio" name="membership" value="2">Gold member
+        <input type="radio" name="membership" value="3">Silver member
+ </td>
+</tr>
+    
+        
 <td colspan="3" align="right">  
    <br>
    <!-- <button type="submit" name="daftar" class="btn btn-primary btn-block">Daftar</button> -->

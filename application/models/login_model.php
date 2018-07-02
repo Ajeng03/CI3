@@ -17,7 +17,7 @@ class LoginModel extends CI_Model {
 	{
 		$this->db->select('id_level');
 		$this->db->from('user_level');
-		$this->db->where('id_user', $id_user);
+		$this->db->where('user_id', $id_user);
 		return $this->db->get()->result();
 	}
 }

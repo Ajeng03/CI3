@@ -19,6 +19,7 @@
     </font>
     <a href="../home/tambah_artikel"><button type="button" class="btn btn-primary">Tambah Artikel</button></a>
     <a href="../category"><button type="button" class="btn btn-primary">Kategori</button></a>
+    <a href="<?php echo base_url(); ?>login/logout"><button type="button" class="btn btn-primary">Logout</button></a>
     <?php 
     foreach ($tampil as $key) {?>
         <table border="1" width="600">

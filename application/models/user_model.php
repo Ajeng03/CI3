@@ -20,7 +20,8 @@ class User_model extends CI_Model {
            'no_telp' => $this->input->post('no_telp'),
            'username' => $this->input->post('username'),
            'password' => $enc_password,
-           'register_date' => date('Y-m-d')
+           'register_date' => date('Y-m-d'),
+           'level_id' => $this->input->post('membership')
        );
        // Insert users
        $this->db->insert('users', $data);
@@ -61,11 +62,11 @@ class User_model extends CI_Model {
       $this->db->insert('user_level', $data);
     }
 
-    public function get_user($username)
+    public function get_user($id)
     {
-      $this->db->select('id');
-      $this->db->from('user');
-      $this->db->where('username', $username);
+      $this->db->select('level_id');
+      $this->db->from('users');
+      $this->db->where('user_id', $id);
       return $this->db->get()->result();
     }
 }
